@@ -2,6 +2,7 @@ import { DataSource } from 'typeorm';
 import config from './config';
 import { Contact } from '../Contacts/contact.entity';
 import { User } from '../Auth/user.entity';
+import { TransactionLifecycle } from '../transactions/TransactionLifecycle.entity';
 
 const isDev = config.env === 'development';
 
@@ -13,7 +14,7 @@ const AppDataSource = new DataSource({
   password: config.db.postgres.password,
   database: config.db.postgres.database,
   synchronize: false,
-  entities: [Contact, User],
+  entities: [Contact, User, TransactionLifecycle],
   migrations: [isDev ? 'src/migrations/**/*.ts' : 'dist/migrations/**/*.js'],
   subscribers: [],
 });
